@@ -1,0 +1,17 @@
+{
+    "name": "Tomatech.AFASS.Editor",
+    "rootNamespace": "Tomatech.AFASS.Editor",
+    "references": [
+        "GUID:fe021c6db9e671443a81c2b21f55252b",
+        "GUID:69448af7b92c7f342b298e06a37122aa"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

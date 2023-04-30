@@ -1,9 +1,10 @@
 {
-    "name": "com.tomatech.afass",
-    "version": "0.1.0",
-    "displayName": "RePalette",
-    "dependencies": {
-        "com.unity.addressables": ""
-    },
-    "description": ""
+  "name": "com.tomatech.afass",
+  "version": "0.1.0",
+  "displayName": "AFASS",
+  "dependencies": {
+    "com.unity.addressables": "",
+    "com.github.bunny83.simplejson": ""
+  },
+  "description": "A system for saving the position of objects and tiles, using Addressables for identifying Prefabs and Scriptable Objects\n\nDepends on\n- Addressables: Built In\n- SimpleJSON: https://github.com/darktable/SimpleJSON.git#unity-package"
 }
