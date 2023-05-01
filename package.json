@@ -3,8 +3,13 @@
   "version": "0.1.0",
   "displayName": "AFASS",
   "dependencies": {
-    "com.unity.addressables": "",
-    "com.github.bunny83.simplejson": ""
+    "com.unity.addressables": "1.21.10",
+    "com.github.bunny83.simplejson": "1.0.0"
+  },
+  "author": {
+    "name": "Tomatech Games",
+    "email": "savaget.tomatech@gmail.com",
+    "url": "https://tomatech.itch.io/"
   },
   "description": "A system for saving the position of objects and tiles, using Addressables for identifying Prefabs and Scriptable Objects\n\nDepends on\n- Addressables: Built In\n- SimpleJSON: https://github.com/darktable/SimpleJSON.git#unity-package"
 }
