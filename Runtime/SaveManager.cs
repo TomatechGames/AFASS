@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.Tilemaps;
 using System.Threading.Tasks;
 using System.Linq;
+using System;
 
 namespace Tomatech.AFASS
 {
@@ -21,12 +22,24 @@ namespace Tomatech.AFASS
         Transform spawnParent;
         [SerializeField]
         Tilemap[] savableTilemaps;
+        [SerializeField]
+        int coroutineIterationsPerFrame = 5;
         public Tilemap[] SavableTilemaps => savableTilemaps;
 
         public JSONObject Save()
         {
+            JSONObject levelData = null;
+            var routine = SaveRoutine(obj=>levelData=obj);
+            while (routine.MoveNext());
+            Debug.Log(routine.Current);
+            return levelData;
+        }
+
+        public IEnumerator SaveRoutine(Action<JSONObject> onComplete)
+        {
+            int currentIterations = 0;
             JSONObject levelData = new();
-            List<string> assetKeys = new();
+            JSONArray assetKeys = new();
             JSONArray tilemapArray = new();
             foreach (var map in savableTilemaps)
             {
@@ -81,6 +94,13 @@ namespace Tomatech.AFASS
                             currentStripLength++;
 
                     }
+                    if (currentIterations > coroutineIterationsPerFrame)
+                    {
+                        currentIterations = 0;
+                        yield return null;
+                    }
+                    else
+                        currentIterations++;
                 }
                 if (currentStripLength != 0)
                 {
@@ -108,17 +128,20 @@ namespace Tomatech.AFASS
                 if (customData != null)
                     prefabData.Add(DATA_KEY, customData);
                 prefabArray.Add(prefabData);
+                if (currentIterations > coroutineIterationsPerFrame)
+                {
+                    currentIterations = 0;
+                    yield return null;
+                }
+                else
+                    currentIterations++;
             }
             levelData.Add(PREFABS_KEY, prefabArray);
 
-            JSONArray keyArray = new();
-            foreach (var key in assetKeys)
-            {
-                keyArray.Add(key);
-            }
-            levelData.Add(KEYS_KEY, keyArray);
+            levelData.Add(KEYS_KEY, assetKeys);
 
-            return levelData;
+            yield return levelData;
+            onComplete?.Invoke(levelData);
         }
         static string TilePosToString(Vector3Int pos) => pos.x + "_" + pos.y;
 

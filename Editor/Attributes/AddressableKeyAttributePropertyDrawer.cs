@@ -42,6 +42,11 @@ namespace Tomatech.AFASS.Editor
                     if (assetObject)
                     {
                         var assetGUID = AssetDatabase.AssetPathToGUID(AssetDatabase.GetAssetPath(assetObject));
+                        if (!AddressableAssetSettingsDefaultObject.Settings)
+                        {
+                            Debug.LogWarning("Addressables has not been set up. Please set it up using \"Window/Asset Management/Addressables/Groups\"");
+                            return;
+                        }
                         var addressableEntry = AddressableAssetSettingsDefaultObject.Settings.FindAssetEntry(assetGUID);
                         if (addressableEntry != null && property.stringValue != addressableEntry.address)
                         {
