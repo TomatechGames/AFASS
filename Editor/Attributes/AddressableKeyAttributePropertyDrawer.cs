@@ -52,7 +52,7 @@ namespace Tomatech.AFASS.Editor
                         {
                             property.stringValue = addressableEntry.address;
                             property.serializedObject.ApplyModifiedProperties();
-                            Debug.Log(addressableEntry.address);
+                            //Debug.Log(addressableEntry.address);
                         }
                     }
                 }
