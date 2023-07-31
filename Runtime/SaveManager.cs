@@ -31,7 +31,7 @@ namespace Tomatech.AFASS
             JSONObject levelData = null;
             var routine = SaveRoutine(obj=>levelData=obj);
             while (routine.MoveNext());
-            Debug.Log(routine.Current);
+            //Debug.Log(routine.Current);
             return levelData;
         }
 
@@ -145,7 +145,7 @@ namespace Tomatech.AFASS
         }
         static string TilePosToString(Vector3Int pos) => pos.x + "_" + pos.y;
 
-        public async Task Load(JSONObject levelData)
+        public async Task Load(JSONObject levelData, bool withLogs = false)
         {
             for (int i = 0; i < spawnParent.childCount; i++)
                 Destroy(spawnParent.GetChild(i).gameObject);
@@ -155,7 +155,7 @@ namespace Tomatech.AFASS
             //JSONObject levelData = JSON.Parse(plainText).AsObject;
             JSONArray keyData = levelData[KEYS_KEY].AsArray;
             string[] assetKeys = keyData.AsEnumerable().Select(x => x.Value).ToArray();
-            await SavableResourceManager.PreloadSaveableAssets(assetKeys);
+            await SavableResourceManager.PreloadSaveableAssets(assetKeys, withLogs);
 
             JSONArray tilemapArray = levelData[TILES_KEY].AsArray;
             for (int i = 0; i < Mathf.Min(tilemapArray.Count, savableTilemaps.Length); i++)
