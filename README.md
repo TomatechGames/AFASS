@@ -1,5 +1,5 @@
 # AFASS
- Another F---ing Addressable Save System
+ Another Form of Addressable Save System
 
 A system for saving the position of objects and tiles, using Addressables for identifying Prefabs and Scriptable Objects
 
